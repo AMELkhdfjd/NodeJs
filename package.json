@@ -1,13 +1,15 @@
-
 {
   "name": "node-http",
   "version": "1.0.0",
-  "description": "node http module exemple",
+  "description": "node Express module exemple",
   "main": "index.js",
   "scripts": {
-   "test": "echo \"Error: no test specified\" && exit 1",
-   "start": "node index"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node index"
   },
   "author": "Amel",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.16.3"
+  }
 }
