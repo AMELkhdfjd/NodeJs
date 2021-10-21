@@ -3,6 +3,9 @@ const express = require('express');
 const http = require('http');
 const morgan = require('morgan');
 const bodyparser = require('body-parser');
+const dishRouter = require('./routes/dishRouter');
+
+//! the reason why we use express for restapi is that for each endpoint we need the three methods get post delete and its too muchso its grouped in the express router to make it easy
 
 
 
@@ -12,30 +15,33 @@ const port = 3000;
 const app = express();
 app.use(morgan('dev'));
 app.use(bodyparser.json());
+app.use('/dishes', dishRouter);
 
-app.all('/dishes', (req, res,next) =>{
-  res.statusCode = 200;
-  res.setHeader('Content-Type', 'text/plain');
-  next();
-})
 
-app.get('/dishes', (req, res, next) =>
-{ 
-  res.end('will send all the dishes to you');
+//todo if we dont use express
+// app.all('/dishes', (req, res,next) =>{
+//   res.statusCode = 200;
+//   res.setHeader('Content-Type', 'text/plain');
+//   next();
+// })
 
-})
+// app.get('/dishes', (req, res, next) =>
+// { ;
+//   res.end('will send all the dishes to you');
 
-app.post('/dishes', (req, res, next) =>{
-  res.end('will add the dish :'+ req.body.name+'with details'+req.body.description);
-})
+// })
 
-app.put('/dishes', (req, res, next) =>{
-  res.statusCode= 403;
-res.end('put operation not supported')})
+// app.post('/dishes', (req, res, next) =>{
+//   res.end('will add the dish :'+ req.body.name+'with details'+req.body.description);
+// })
 
-app.delete('/dishes', (req, res, next) =>{
-res.end('deleting all the dishes');
-})
+// app.put('/dishes', (req, res, next) =>{
+//   res.statusCode= 403;
+// res.end('put operation not supported')})
+
+// app.delete('/dishes', (req, res, next) =>{
+// res.end('deleting all the dishes');
+// })
 
 
 
