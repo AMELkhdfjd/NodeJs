@@ -4,6 +4,8 @@ const http = require('http');
 const morgan = require('morgan');
 const bodyparser = require('body-parser');
 const dishRouter = require('./routes/dishRouter');
+const  promotionsRouter = require('./routes/promotionRouter');
+const leadersRouter = require('./routes/leadersRouter');
 
 //! the reason why we use express for restapi is that for each endpoint we need the three methods get post delete and its too muchso its grouped in the express router to make it easy
 
@@ -15,7 +17,10 @@ const port = 3000;
 const app = express();
 app.use(morgan('dev'));
 app.use(bodyparser.json());
+app.use('/promotions', promotionsRouter);
+app.use('/leaders', leadersRouter);
 app.use('/dishes', dishRouter);
+
 
 
 //todo if we dont use express
@@ -49,26 +54,26 @@ app.use('/dishes', dishRouter);
 
 
 
-app.get('/dishes/:dishId', (req, res, next) =>
-{ 
-  res.end('will send details of the dish :' + 
-  req.params.dishId);
+// app.get('/dishes/:dishId', (req, res, next) =>
+// { 
+//   res.end('will send details of the dish :' + 
+//   req.params.dishId);
 
-})
+// })
 
-app.post('/dishes/:dishId', (req, res, next) =>{
-  res.statusCode= 403;
-  res.end('post operation not supported')
-})
+// app.post('/dishes/:dishId', (req, res, next) =>{
+//   res.statusCode= 403;
+//   res.end('post operation not supported')
+// })
 
-app.put('/dishes/:dishId', (req, res, next) =>{
-res.write('updating the dish :' + req.params.dishId);
-res.end('will update the dish :' + req.body.name+ 'with details' + req.body.description);
-})
+// app.put('/dishes/:dishId', (req, res, next) =>{
+// res.write('updating the dish :' + req.params.dishId);
+// res.end('will update the dish :' + req.body.name+ 'with details' + req.body.description);
+// })
 
-app.delete('/dishes/:dishId', (req, res, next) =>{
-  res.write('deleting the dish :' + req.params.dishId);
-})
+// app.delete('/dishes/:dishId', (req, res, next) =>{
+//   res.write('deleting the dish :' + req.params.dishId);
+// })
 
 
 
